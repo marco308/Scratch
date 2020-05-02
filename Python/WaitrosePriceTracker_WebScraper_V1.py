@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 # url = 'https://www.amazon.co.uk/Bollinger-Special-Cuv%C3%A9e-Champagne-75cl/dp/B003V3POVS/ref=pd_bxgy_2/258-9388692-0043732?_encoding=UTF8&pd_rd_i=B003V3POVS&pd_rd_r=f364fb00-be3b-4087-ac6c-a30d66e41d46&pd_rd_w=wctHM&pd_rd_wg=Sinkb&pf_rd_p=106f838b-b7d1-46e9-83e0-f70facc857bf&pf_rd_r=QJGC61MK0SQD0P7J0Z38&psc=1&refRID=QJGC61MK0SQD0P7J0Z38'
 # url = 'https://www.amazon.co.uk/Bollinger-Rose-Non-Vintage-Champagne/dp/B005VRLJNY'
 url = 'https://www.waitrose.com/ecom/products/warburtons-toastie-thick-sliced-white-bread/026841-13059-13060'
+url ='https://www.waitrose.com/ecom/products/laurent-perrier-la-cuvee-nv-champagne/079298-40367-40368'
 
 
 # just google 'my user agent' to get this info 
@@ -20,9 +21,11 @@ page = requests.get(url, headers=headers)
 soup = BeautifulSoup(page.content, 'html.parser')
  
 # title = soup.find(id="productTitle")
-price = soup.findAll("span", {"class": "pricePerUnit___1L8TG"})
+title = soup.find(id="productName").get_text()
+price = soup.findAll("span", {"data-test": "product-pod-price"})
 
 
-
-# print(title) 
-print(price)
+print('================')
+print(title) 
+print(price[0].get_text())
+print('================')
